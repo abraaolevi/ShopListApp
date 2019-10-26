@@ -29,6 +29,18 @@ class Repository {
         return nil
     }
     
+    func updateObject<T: Object>(_ object: T) -> T? {
+        do {
+            try realm.write {
+                realm.add(object, update: .modified)
+            }
+            return object
+        } catch {
+            printLog(error.localizedDescription)
+        }
+        return nil
+    }
+
     func deleteObject(_ obejct: Object) -> Bool {
         do {
             try realm.write {

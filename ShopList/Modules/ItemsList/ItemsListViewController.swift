@@ -19,35 +19,77 @@ class ItemsListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        initTableView()
+        
+        viewModel?.rowViewModels.addObserver { [weak self] _ in
+            self?.tableView.reloadData()
+        }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+    }
+    
+    func initTableView() {
+        tableView.register(UINib(nibName: ItemListCell.cellIdentifier(), bundle: nil), forCellReuseIdentifier: ItemListCell.cellIdentifier())
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return viewModel?.rowViewModels.value.count ?? 0
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ItemListCell.cellIdentifier(), for: indexPath)
 
-        // Configure the cell...
+        if let cell = cell as? CellConfigurable {
+            if let viewModel = viewModel?.getRowViewModel(at: indexPath) {
+                cell.setup(viewModel: viewModel)
+            }
+        }
 
         return cell
     }
-    */
 
+    @IBAction func addItemButtonClicked(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Add new item", message: nil, preferredStyle: .alert)
+        
+        var nameTextField = UITextField()
+        alertController.addTextField {
+            (textField) in
+            nameTextField = textField
+            nameTextField.placeholder = "Item name"
+        }
+        
+        var priceTextField = UITextField()
+        alertController.addTextField { (textField) in
+            priceTextField = textField
+            priceTextField.placeholder = "Price"
+        }
+  
+        let addAction = UIAlertAction(title: "Add", style: .default) { (action) in
+            if let name = nameTextField.text, let price = priceTextField.text {
+                self.viewModel?.createItem(name: name, price: Decimal(string: price) ?? Decimal(0))
+                self.tableView.reloadData()
+            }
+        }
+
+        alertController.addAction(addAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

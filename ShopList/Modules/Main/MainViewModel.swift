@@ -43,7 +43,7 @@ class MainViewModel {
     func getRowViewModel(at indexPath: IndexPath) -> RowViewModel {
         return rowViewModels.value[indexPath.row]
     }
-
+    
     func createList(name: String) -> Void {
         let list = List()
         list.name = name

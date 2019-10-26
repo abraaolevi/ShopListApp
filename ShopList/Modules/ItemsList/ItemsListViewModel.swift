@@ -26,7 +26,7 @@ class ItemsListViewModel {
         let items = list.items.toArray(type: Item.self)
         buildRowViewModels(items)
     }
-    
+        
     func buildRowViewModels(_ items: [Item]) {
         var rowVMs = [RowViewModel]()
         for item in items {
@@ -45,7 +45,8 @@ class ItemsListViewModel {
         item.setPrice(price)
         item.setDiscount(type: discountType)
         item.setDiscount(value: discountValue)
-        repository.add(item)
+        repository.add(item: item , list: list)
+        reloadData()
     }
     
     func deleteItem(at index: Int) -> Void {

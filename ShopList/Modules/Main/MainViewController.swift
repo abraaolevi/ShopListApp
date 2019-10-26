@@ -60,7 +60,7 @@ class MainViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "itemsListSegue", sender: self)
+        performSegue(withIdentifier: "itemsListSegue", sender: viewModel.getRowViewModel(at: indexPath))
     }
 
     // MARK: - Navigation
@@ -72,8 +72,8 @@ class MainViewController: UITableViewController {
         
         if segue.identifier == "itemsListSegue" {
             if let destination = segue.destination as? ItemsListViewController {
-                guard let selectedList = viewModel.selectedList else { return }
-                destination.viewModel = ItemsListViewModel(list: selectedList)
+                guard let selected = sender as? MainCellViewModel else { return }
+                destination.viewModel = ItemsListViewModel(list: selected.list)
             }
         }
     }
