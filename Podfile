@@ -6,7 +6,7 @@ target 'ShopList' do
   use_frameworks!
 
   # Pods for ShopList
-  pod 'RealmSwift'
+  pod 'RealmSwift', '~> 3.20.0'
 
   target 'ShopListTests' do
     inherit! :search_paths

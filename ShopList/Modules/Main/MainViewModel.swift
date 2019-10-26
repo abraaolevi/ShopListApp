@@ -18,8 +18,7 @@ class MainViewModel {
     var selectedList: List? {
         set { _selectedList = newValue }
         get {
-            
-            return
+            return _selectedList
         }
     }
 
