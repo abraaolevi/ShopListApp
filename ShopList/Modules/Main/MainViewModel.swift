@@ -21,29 +21,38 @@ class MainViewModel {
             return _selectedList
         }
     }
-
+    
     init(repository: ListRepository = ListRepository()) {
         self.repository = repository
         reloadData()
+        
     }
     
-    func reloadData() {
-        let lists = repository.findAllLists()
-        buildRowViewModels(lists)
-    }
-    
-    func buildRowViewModels(_ lists: [List]) {
-        var rowVMs = [RowViewModel]()
-        for list in lists {
-            rowVMs.append(MainCellViewModel(list))
+    func reloadData(lists: [List]? = nil) {
+        if lists == nil {
+            let lists = repository.findAllLists()
+            buildRowViewModels(lists)
+        } else {
+            buildRowViewModels(lists ?? [])
         }
-        rowViewModels.value = rowVMs
+    }
+            
+    func buildRowViewModels(_ lists: [List]) {
+        rowViewModels.value = lists.map {
+            MainCellViewModel($0)
+        }
+    }
+    
+    func filter(with name: String) {
+        let namePredicate = NSPredicate(format: "name CONTAINS[c] %@", name)
+        let filteredList = repository.filterAllLists(withPredicate: namePredicate)
+        reloadData(lists: filteredList)
     }
 
     func getRowViewModel(at indexPath: IndexPath) -> RowViewModel {
         return rowViewModels.value[indexPath.row]
     }
-
+    
     func createList(name: String) -> Void {
         let list = List()
         list.name = name
@@ -55,7 +64,6 @@ class MainViewModel {
         guard let rowVM = getRowViewModel(at: IndexPath(row: index, section: 0)) as? MainCellViewModel else {
             return
         }
-        
         repository.delete(rowVM.list)
         reloadData()
     }

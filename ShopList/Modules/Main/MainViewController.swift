@@ -9,9 +9,11 @@
 import UIKit
 
 class MainViewController: UITableViewController {
+    
+    // MARK: IBOutlets
+    @IBOutlet weak var searchBar: UISearchBar!
 
     // MARK: Properties
-
     let viewModel = MainViewModel()
     
     // MARK: Life cicly
@@ -23,6 +25,8 @@ class MainViewController: UITableViewController {
         viewModel.rowViewModels.addObserver { [weak self] _ in
             self?.tableView.reloadData()
         }
+
+        searchBar.delegate = self
     }
 
     func initTableView() {
@@ -60,7 +64,7 @@ class MainViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "itemsListSegue", sender: self)
+        performSegue(withIdentifier: "itemsListSegue", sender: viewModel.getRowViewModel(at: indexPath))
     }
 
     // MARK: - Navigation
@@ -72,8 +76,8 @@ class MainViewController: UITableViewController {
         
         if segue.identifier == "itemsListSegue" {
             if let destination = segue.destination as? ItemsListViewController {
-                guard let selectedList = viewModel.selectedList else { return }
-                destination.viewModel = ItemsListViewModel(list: selectedList)
+                guard let selected = sender as? MainCellViewModel else { return }
+                destination.viewModel = ItemsListViewModel(list: selected.list)
             }
         }
     }
@@ -103,7 +107,19 @@ class MainViewController: UITableViewController {
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(cancelAction)
-        
+
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension MainViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let searchedText = searchBar.text {
+            debugPrint(searchedText)
+            viewModel.filter(with: searchedText)
+            if searchedText.count == 0 {
+                viewModel.reloadData()
+            }
+        }
     }
 }

@@ -29,6 +29,18 @@ class Repository {
         return nil
     }
     
+    func updateObject<T: Object>(_ object: T) -> T? {
+        do {
+            try realm.write {
+                realm.add(object, update: .modified)
+            }
+            return object
+        } catch {
+            printLog(error.localizedDescription)
+        }
+        return nil
+    }
+
     func deleteObject(_ obejct: Object) -> Bool {
         do {
             try realm.write {
@@ -43,6 +55,10 @@ class Repository {
 
     func findAll<T: Object>(type: T.Type) -> Results<T>? {
         return realm.objects(type)
+    }
+
+    func filterAll<T: Object>(type: T.Type, predicate: NSPredicate) -> Results<T>? {
+        return realm.objects(type).filter(predicate)
     }
     
     func incrementID<T: Object>(for type: T.Type) -> Int {

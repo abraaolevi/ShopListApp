@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,9 +33,11 @@
 		8E9830CA221CE9C200C4B05F /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9830C9221CE9C200C4B05F /* RowViewModel.swift */; };
 		8EB3919A226B805900B1E4BD /* ItemsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB39199226B805900B1E4BD /* ItemsListViewModel.swift */; };
 		8EB3919C226B846300B1E4BD /* ItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3919B226B846300B1E4BD /* ItemRepository.swift */; };
-		8EB3919F226B89A200B1E4BD /* ItemListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3919E226B89A200B1E4BD /* ItemListCellViewModel.swift */; };
 		8EB391A1226B8D7300B1E4BD /* RealmDecimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB391A0226B8D7300B1E4BD /* RealmDecimal.swift */; };
 		BD86D8B7E553CDB593FEA015 /* Pods_ShopList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0336441975A29A871C6EC9A /* Pods_ShopList.framework */; };
+		D53FADBF236195BB006AD6DE /* ItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53FADBD236195BB006AD6DE /* ItemListCell.swift */; };
+		D53FADC0236195BB006AD6DE /* ItemListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53FADBE236195BB006AD6DE /* ItemListCell.xib */; };
+		D53FADC223619793006AD6DE /* ItemListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53FADC123619793006AD6DE /* ItemListCellViewModel.swift */; };
 		FDB63CED6E461099BA82C389 /* Pods_ShopListUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49079477A19906D5AC185EF /* Pods_ShopListUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,10 +95,12 @@
 		8E9830C9221CE9C200C4B05F /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
 		8EB39199226B805900B1E4BD /* ItemsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListViewModel.swift; sourceTree = "<group>"; };
 		8EB3919B226B846300B1E4BD /* ItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRepository.swift; sourceTree = "<group>"; };
-		8EB3919E226B89A200B1E4BD /* ItemListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCellViewModel.swift; sourceTree = "<group>"; };
 		8EB391A0226B8D7300B1E4BD /* RealmDecimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDecimal.swift; sourceTree = "<group>"; };
 		9553044B34F5AE76119A8F03 /* Pods-ShopListTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopListTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopListTests/Pods-ShopListTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C6830EC080E6FBBC59D3960F /* Pods-ShopListTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopListTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopListTests/Pods-ShopListTests.release.xcconfig"; sourceTree = "<group>"; };
+		D53FADBD236195BB006AD6DE /* ItemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCell.swift; sourceTree = "<group>"; };
+		D53FADBE236195BB006AD6DE /* ItemListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemListCell.xib; sourceTree = "<group>"; };
+		D53FADC123619793006AD6DE /* ItemListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCellViewModel.swift; sourceTree = "<group>"; };
 		E0336441975A29A871C6EC9A /* Pods_ShopList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49079477A19906D5AC185EF /* Pods_ShopListUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopListUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -290,7 +294,9 @@
 		8EB3919D226B898100B1E4BD /* Row */ = {
 			isa = PBXGroup;
 			children = (
-				8EB3919E226B89A200B1E4BD /* ItemListCellViewModel.swift */,
+				D53FADBD236195BB006AD6DE /* ItemListCell.swift */,
+				D53FADBE236195BB006AD6DE /* ItemListCell.xib */,
+				D53FADC123619793006AD6DE /* ItemListCellViewModel.swift */,
 			);
 			path = Row;
 			sourceTree = "<group>";
@@ -417,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E98307C2218794E00C4B05F /* LaunchScreen.storyboard in Resources */,
+				D53FADC0236195BB006AD6DE /* ItemListCell.xib in Resources */,
 				8E9830792218794E00C4B05F /* Assets.xcassets in Resources */,
 				78DFB8F0221E07BA009FE77E /* MainCell.xib in Resources */,
 				8E9830772218794D00C4B05F /* Main.storyboard in Resources */,
@@ -531,11 +538,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E9830B7221982AA00C4B05F /* Repository.swift in Sources */,
-				8EB3919F226B89A200B1E4BD /* ItemListCellViewModel.swift in Sources */,
 				8EB391A1226B8D7300B1E4BD /* RealmDecimal.swift in Sources */,
 				8E9830B22218A73300C4B05F /* PersisterManager.swift in Sources */,
 				8E9830B02218A4B300C4B05F /* Item.swift in Sources */,
 				78DFB8F2221E0863009FE77E /* MainCellViewModel.swift in Sources */,
+				D53FADC223619793006AD6DE /* ItemListCellViewModel.swift in Sources */,
 				8E9830BA221983A800C4B05F /* RealmSwift+Extension.swift in Sources */,
 				8E9830C5221CE83400C4B05F /* Observable.swift in Sources */,
 				8E9830BC2219863100C4B05F /* ListRepository.swift in Sources */,
@@ -548,6 +555,7 @@
 				8E9830BF221B957D00C4B05F /* ItemsListViewController.swift in Sources */,
 				8E9830AE2218A1C300C4B05F /* List.swift in Sources */,
 				8E9830B42218A9D400C4B05F /* MainViewModel.swift in Sources */,
+				D53FADBF236195BB006AD6DE /* ItemListCell.swift in Sources */,
 				8E9830CA221CE9C200C4B05F /* RowViewModel.swift in Sources */,
 				78DFB8EF221E07BA009FE77E /* MainCell.swift in Sources */,
 				78DFB8F6221ECF96009FE77E /* HelperFunctions.swift in Sources */,

@@ -31,6 +31,17 @@ class ListRepository: Repository {
         return deleteObject(list)
     }
     
+    @discardableResult
+    func filterAllLists(withName name: String) -> [List] {
+        // example usage without using NSPredicate
+        return findAll(type: List.self)?.filter("name = '\(name)'").toArray(type: List.self) ?? []
+    }
+    
+    @discardableResult
+    func filterAllLists(withPredicate predicate: NSPredicate) -> [List] {
+        return filterAll(type: List.self, predicate: predicate)?.toArray(type: List.self) ?? []
+    }
+
     func findAllLists() -> [List] {
         guard let result = findAll(type: List.self) else {
             return []
